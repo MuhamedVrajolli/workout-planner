@@ -1,0 +1,54 @@
+services:
+  db:
+    image: 'fitness-db:latest'
+    container_name: fitness_app_db
+    environment:
+      - 'POSTGRES_DB=fitness'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+  pgadmin:
+    container_name: fitness_app_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+  keycloak:
+    container_name: fitness_app_keycloak
+    image: quay.io/keycloak/keycloak:legacy
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: fitness_app_db
+      DB_DATABASE: keycloak
+      DB_USER: postgres
+      DB_SCHEMA: public
+      DB_PASSWORD: postgres
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - "8000:8080"
+    depends_on:
+      - db
+  app:
+    image: 'fitness-app:latest'
+    container_name: fitness_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+
+networks:
+  default:
+    name: fitness_app_network
+

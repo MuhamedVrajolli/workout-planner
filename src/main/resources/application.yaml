@@ -1,0 +1,36 @@
+spring:
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: DEFAULT
+  main:
+    banner-mode: "off"
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://fitness_app_db:5432/fitness
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+        temp:
+          use_jdbc_metadata_defaults: false
+        order_by:
+          default_null_ordering: last
+    open-in-view: false
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
+
+keycloak:
+  auth-server-url: http://localhost:8000/auth
+  realm: fitness-app
+  resource: fitness-app
+  credentials:
+    secret: ${KEYCLOAK_SECRET}
+  bearer-only: true
