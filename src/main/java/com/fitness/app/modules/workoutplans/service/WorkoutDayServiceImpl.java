@@ -38,7 +38,7 @@ public class WorkoutDayServiceImpl implements WorkoutDayService {
   @Override
   public WorkoutDay updateWorkoutDay(Integer id, WorkoutDay workoutDay) {
     WorkoutDayEntity existingEntity = workoutDayRepository.findById(id)
-        .orElseThrow(() -> new NotFoundException("WorkoutPlan not found with id: " + id));
+        .orElseThrow(() -> new NotFoundException("WorkoutDay not found with id: " + id));
 
     workoutDayMapper.updateWorkoutDayEntity(existingEntity, workoutDay);
 

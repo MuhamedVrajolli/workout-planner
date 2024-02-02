@@ -4,6 +4,7 @@ import com.fitness.app.modules.workoutplans.models.WorkoutDay;
 import java.util.List;
 
 public interface WorkoutDayService {
+
   List<WorkoutDay> getWorkoutDays(Integer workoutPlanId);
 
   WorkoutDay getWorkoutDayById(Integer id);

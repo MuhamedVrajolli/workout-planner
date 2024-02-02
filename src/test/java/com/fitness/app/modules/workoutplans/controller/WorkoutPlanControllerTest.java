@@ -3,6 +3,7 @@ package com.fitness.app.modules.workoutplans.controller;
 import static com.fitness.app.utils.RestUtils.toJson;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,9 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(WorkoutPlanController.class)
+@WithMockUser
 class WorkoutPlanControllerTest {
 
 	@Autowired
@@ -56,6 +59,7 @@ class WorkoutPlanControllerTest {
 		when(workoutPlanService.createWorkoutPlan(any())).thenReturn(response);
 
 		this.mockMvc.perform(post("/workout-plans")
+						.with(csrf())
 						.content(toJson(WorkoutPlanDetails.builder().name("Test").build()))
 						.contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isCreated())
@@ -68,6 +72,7 @@ class WorkoutPlanControllerTest {
 		when(workoutPlanService.updateWorkoutPlan(any(), any())).thenReturn(response);
 
 		this.mockMvc.perform(put("/workout-plans/{id}", 1)
+						.with(csrf())
 						.content(toJson(WorkoutPlanDetails.builder().name("Test").build()))
 						.contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk())
@@ -77,7 +82,8 @@ class WorkoutPlanControllerTest {
 
 	@Test
 	void deleteWorkoutPlan() throws Exception {
-		this.mockMvc.perform(delete("/workout-plans/{id}", 1))
+		this.mockMvc.perform(delete("/workout-plans/{id}", 1)
+						.with(csrf()))
 				.andExpect(status().isNoContent());
 	}
 }

@@ -1,13 +1,13 @@
 package com.fitness.app.modules.workoutplans.repository;
 
+import com.fitness.app.common.repository.BaseRepository;
 import com.fitness.app.modules.workoutplans.entities.WorkoutPlanEntity;
 import jakarta.transaction.Transactional;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface WorkoutPlanRepository extends JpaRepository<WorkoutPlanEntity, Integer> {
+public interface WorkoutPlanRepository extends BaseRepository<WorkoutPlanEntity, Integer>, WorkoutPlanCustomRepository {
 
   @Query("""
     SELECT workoutPlan FROM WorkoutPlanEntity workoutPlan

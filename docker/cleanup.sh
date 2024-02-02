@@ -6,7 +6,7 @@ POSTGRES_IMAGE_NAME="fitness-db"
 
 # Stop and remove containers, networks, and volumes
 echo "Stopping and removing containers, networks, and volumes..."
-docker-compose -f compose.yml -p fitness down -v
+docker-compose -f compose.yaml -p fitness down -v
 
 # Remove specific Docker images
 echo "Removing Docker images..."
