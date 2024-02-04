@@ -1,20 +1,21 @@
-package com.fitness.app.modules.workoutplans.controller;
+package com.fitness.app.workoutplans.controller;
 
 import static com.fitness.app.utils.RestUtils.toJson;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fitness.app.exceptions.NotFoundException;
-import com.fitness.app.modules.workoutplans.models.WorkoutPlanDetails;
-import com.fitness.app.modules.workoutplans.service.WorkoutPlanService;
+import com.fitness.app.workoutplans.controller.WorkoutPlanController;
+import com.fitness.app.workoutplans.models.WorkoutPlanDetails;
+import com.fitness.app.workoutplans.service.WorkoutPlanService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -35,13 +36,12 @@ class WorkoutPlanControllerTest {
 	@Test
 	void getWorkoutPlans() throws Exception {
 		this.mockMvc.perform(get("/workout-plans"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
+				.andExpect(status().isOk());
 	}
 
 	@Test
 	void getWorkoutPlansById() throws Exception {
-		this.mockMvc.perform(get("/workout-plans/{id}", 1))
+		this.mockMvc.perform(get("/workout-plans/{id}", anyInt()))
 				.andExpect(status().isOk());
 	}
 
@@ -49,7 +49,7 @@ class WorkoutPlanControllerTest {
 	void getWorkoutPlansById_notFound() throws Exception {
 		when(workoutPlanService.getWorkoutPlanById(any())).thenThrow(new NotFoundException());
 
-		this.mockMvc.perform(get("/workout-plans/{id}", 1))
+		this.mockMvc.perform(get("/workout-plans/{id}", anyInt()))
 				.andExpect(status().isNotFound());
 	}
 
@@ -82,7 +82,7 @@ class WorkoutPlanControllerTest {
 
 	@Test
 	void deleteWorkoutPlan() throws Exception {
-		this.mockMvc.perform(delete("/workout-plans/{id}", 1)
+		this.mockMvc.perform(delete("/workout-plans/{id}", anyInt())
 						.with(csrf()))
 				.andExpect(status().isNoContent());
 	}

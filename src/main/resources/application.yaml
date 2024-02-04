@@ -7,7 +7,7 @@ spring:
     banner-mode: "off"
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://fitness_app_db:5432/fitness
+    url: jdbc:postgresql://localhost:5432/fitness
     username: postgres
     password: postgres
   jpa:
@@ -21,6 +21,7 @@ spring:
           use_jdbc_metadata_defaults: false
         order_by:
           default_null_ordering: last
+        format_sql: true
     open-in-view: false
 logging:
   level:

@@ -23,7 +23,7 @@ public class SecurityConfiguration {
     http
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(AUTH_WHITELIST).permitAll()
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
         )
         .httpBasic(withDefaults());
     return http.build();
