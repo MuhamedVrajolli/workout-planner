@@ -40,12 +40,12 @@ public class WorkoutPlanController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public WorkoutPlanDetails createWorkoutPlan(@RequestBody WorkoutPlanDetails workoutPlan) {
+  public WorkoutPlan createWorkoutPlan(@RequestBody WorkoutPlan workoutPlan) {
     return workoutPlanService.createWorkoutPlan(workoutPlan);
   }
 
   @PutMapping("/{id}")
-  public WorkoutPlanDetails updateWorkoutPlan(@PathVariable Integer id, @RequestBody WorkoutPlanDetails workoutPlan) {
+  public WorkoutPlan updateWorkoutPlan(@PathVariable Integer id, @RequestBody WorkoutPlan workoutPlan) {
     return workoutPlanService.updateWorkoutPlan(id, workoutPlan);
   }
 

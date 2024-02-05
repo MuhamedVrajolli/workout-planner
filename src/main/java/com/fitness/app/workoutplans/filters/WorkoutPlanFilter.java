@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class WorkoutPlanFilter extends BaseFilter {
 
-  @NullOrNotBlank
+  @NullOrNotBlank(message = "{workout-plan.validation.filters.name}")
   private String name;
   @ValidEnum(enumClass = WorkoutPlanCategory.class)
   private String category;

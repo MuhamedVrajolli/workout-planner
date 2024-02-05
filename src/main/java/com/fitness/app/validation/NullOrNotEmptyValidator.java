@@ -8,10 +8,6 @@ import java.util.Collection;
 public class NullOrNotEmptyValidator implements ConstraintValidator<NullOrNotEmpty, Object> {
 
   @Override
-  public void initialize(NullOrNotEmpty constraintAnnotation) {
-  }
-
-  @Override
   public boolean isValid(Object value, ConstraintValidatorContext context) {
     if (value == null) {
       return true; // null is considered valid

@@ -14,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fitness.app.exceptions.NotFoundException;
 import com.fitness.app.workoutplans.controller.WorkoutPlanController;
+import com.fitness.app.workoutplans.models.WorkoutPlan;
 import com.fitness.app.workoutplans.models.WorkoutPlanDetails;
 import com.fitness.app.workoutplans.service.WorkoutPlanService;
 import org.junit.jupiter.api.Test;
@@ -55,7 +56,7 @@ class WorkoutPlanControllerTest {
 
 	@Test
 	void createWorkoutPlan() throws Exception {
-		WorkoutPlanDetails response = WorkoutPlanDetails.builder().id(1).build();
+		WorkoutPlan response = WorkoutPlan.builder().id(1).build();
 		when(workoutPlanService.createWorkoutPlan(any())).thenReturn(response);
 
 		this.mockMvc.perform(post("/workout-plans")
@@ -68,7 +69,7 @@ class WorkoutPlanControllerTest {
 
 	@Test
 	void updateWorkoutPlan() throws Exception {
-		WorkoutPlanDetails response = WorkoutPlanDetails.builder().id(1).name("Test").build();
+		WorkoutPlan response = WorkoutPlan.builder().id(1).name("Test").build();
 		when(workoutPlanService.updateWorkoutPlan(any(), any())).thenReturn(response);
 
 		this.mockMvc.perform(put("/workout-plans/{id}", 1)

@@ -33,21 +33,21 @@ public class WorkoutPlanServiceImpl implements WorkoutPlanService {
   }
 
   @Override
-  public WorkoutPlanDetails createWorkoutPlan(WorkoutPlanDetails workoutPlan) {
+  public WorkoutPlan createWorkoutPlan(WorkoutPlan workoutPlan) {
     WorkoutPlanEntity entity = workoutPlanMapper.toWorkoutPlanEntity(workoutPlan);
 
-    return workoutPlanMapper.toWorkoutPlanDetails(workoutPlanRepository.save(entity));
+    return workoutPlanMapper.toWorkoutPlan(workoutPlanRepository.save(entity));
   }
 
   @Override
   @Transactional
-  public WorkoutPlanDetails updateWorkoutPlan(Integer id, WorkoutPlanDetails workoutPlan) {
+  public WorkoutPlan updateWorkoutPlan(Integer id, WorkoutPlan workoutPlan) {
     WorkoutPlanEntity existingEntity = workoutPlanRepository.findByIdWithDetails(id)
         .orElseThrow(() -> new NotFoundException("WorkoutPlan not found with id: " + id));
 
     workoutPlanMapper.updateWorkoutPlanEntity(existingEntity, workoutPlan);
 
-    return workoutPlanMapper.toWorkoutPlanDetails(existingEntity);
+    return workoutPlanMapper.toWorkoutPlan(existingEntity);
   }
 
   @Override

@@ -12,9 +12,9 @@ public interface WorkoutPlanService {
 
   WorkoutPlanDetails getWorkoutPlanById(Integer id);
 
-  WorkoutPlanDetails createWorkoutPlan(WorkoutPlanDetails workoutPlan);
+  WorkoutPlan createWorkoutPlan(WorkoutPlan workoutPlan);
 
-  WorkoutPlanDetails updateWorkoutPlan(Integer id, WorkoutPlanDetails workoutPlan);
+  WorkoutPlan updateWorkoutPlan(Integer id, WorkoutPlan workoutPlan);
 
   void deleteWorkoutPlan(Integer id);
 }
