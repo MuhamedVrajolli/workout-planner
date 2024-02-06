@@ -20,8 +20,8 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 public @interface ValidEnum {
   Class<? extends Enum<?>> enumClass();
-  String message() default "must be any of enum {enumClass} or empty if allowed";
-  boolean allowEmpty() default false;
+  String message() default "must be null or any of enum {enumClass}";
+  boolean allowNull() default true;
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 }

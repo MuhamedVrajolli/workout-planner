@@ -38,11 +38,13 @@ java {
 		// Swagger
 		implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 
-		// Database
+    // Database
 		runtimeOnly 'org.postgresql:postgresql'
 
 		// Testing
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.testcontainers:junit-jupiter'
+		testImplementation 'org.testcontainers:postgresql'
 
 		// Lombok
 		compileOnly 'org.projectlombok:lombok'

@@ -3,7 +3,7 @@
 # Function to clean up resources
 cleanup() {
     echo "An error occurred. Cleaning up..."
-    docker-compose -f compose.yaml down -v
+    docker-compose -f compose.yml down -v
     exit 1
 }
 
@@ -18,6 +18,6 @@ docker build -f Dockerfile_postgres -t fitness-db ../
 
 # Start services using docker-compose
 echo "Starting services with Docker Compose..."
-docker-compose -f compose.yaml -p fitness up -d
+docker-compose -f compose.yml -p fitness up -d
 
 echo "Setup completed successfully."

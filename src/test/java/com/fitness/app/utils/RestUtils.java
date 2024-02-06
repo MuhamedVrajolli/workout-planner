@@ -3,6 +3,7 @@ package com.fitness.app.utils;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.IOException;
 public final class RestUtils {
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
       .setSerializationInclusion(Include.NON_EMPTY)
+      .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
       .registerModule(new JavaTimeModule())
       .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
