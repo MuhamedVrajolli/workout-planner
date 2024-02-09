@@ -1,11 +1,12 @@
 package com.fitness.app.exercises.service;
 
 import com.fitness.app.exercises.models.Exercise;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ExerciseService {
 
-  List<Exercise> getExercises();
+  Page<Exercise> getExercises(Pageable pageable);
 
   Exercise getExerciseById(Integer id);
 

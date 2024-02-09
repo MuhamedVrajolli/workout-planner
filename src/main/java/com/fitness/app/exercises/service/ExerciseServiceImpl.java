@@ -6,6 +6,8 @@ import com.fitness.app.exercises.models.Exercise;
 import com.fitness.app.exercises.repository.ExerciseRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +18,8 @@ public class ExerciseServiceImpl implements ExerciseService {
   private final ExerciseMapper exerciseMapper;
 
   @Override
-  public List<Exercise> getExercises() {
-    return exerciseRepository.findAll().stream().map(exerciseMapper::toExercise).toList();
+  public Page<Exercise> getExercises(Pageable pageable) {
+    return exerciseRepository.findAll(pageable).map(exerciseMapper::toExercise);
   }
 
   @Override
